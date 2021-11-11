@@ -14,7 +14,7 @@ function findLongestSubstring(searchString){
     while(endPtr < searchString.length){
         //grab the character, here named tempChar for clarity's sake
         tempChar = searchString[endPtr];
-        console.log(tempChar);
+        //console.log(tempChar);
         //if the object doesn't have it yet, initialize it at 0 then add 1,
         //otherwise just add one to the count
         stringObj[tempChar] = (stringObj[tempChar] || 0) + 1;
@@ -38,10 +38,10 @@ function findLongestSubstring(searchString){
         }
         tempLength = endPtr - startPtr + 1;
         maxLength = Math.max(tempLength, maxLength);
-        console.log('maxLength:', maxLength);
+        //console.log('maxLength:', maxLength);
         //move endPtr to the next spot
         endPtr++;
-        console.log('endPtr:', endPtr);
+        //console.log('endPtr:', endPtr);
     } // end while
 
     tempLength = endPtr - startPtr;
@@ -50,18 +50,15 @@ function findLongestSubstring(searchString){
     return maxLength;
 }
 
-//failed on the last test, of course. I need to somehow delete all entries of values that 
-//were before the new start. Otherwise a duplicate could trip on a previous value... but how to do that?
-
 
 //findLongestSubstring('') // 0
 //findLongestSubstring('rithmschool') // 7
-//findLongestSubstring('thisisawesome') // 6
+findLongestSubstring('thisisawesome') // 6
 //findLongestSubstring('thecatinthehat') // 7
 //findLongestSubstring('bbbbbb') // 1
 //
 //findLongestSubstring('longestsubstring') // 8
 //                    0123456789012345
 
-findLongestSubstring('s1234s67890s'); // 10
+//findLongestSubstring('s1234s67890s'); // 10
 
