@@ -24,6 +24,16 @@ function fib(nth) {
 
 }
 
+/***** SOLUTION ********
+So the solution to this was painfully simple:
+
+function fib(n) {
+    if(n<=2) return 1;
+    return fib(n-1) + fib(n-2);
+}
+
+***********************/
+
 //console.log(fib(2)) //1
 console.log(fib(4)) //3
 console.log(fib(10)) //55
