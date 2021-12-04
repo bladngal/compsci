@@ -1,5 +1,5 @@
 function factorial(base) {
-    if(base === 1) return 1;
+    if(base === 0) return 1;
 
     return base * factorial(base - 1);
 
