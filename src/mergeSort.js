@@ -27,19 +27,15 @@ function mergeArrays(arr1, arr2) {
 //take an array and break it in half, returning two smaller arrays
 //once each array has 1 or 0 elements in it, merge those arrays together
 function mergeSort(arr){
+    if(arr.length <=1) return arr;
+
     var middle = Math.floor(arr.length/2);
-    var arr1 = arr.slice(0, middle);
-    var arr2 = arr.slice(middle, arr.length);
-    var mergedArray;
-    if(arr1.length <=1 && arr2.length <=1){
-        mergedArray = mergeArrays(arr1, arr2);
-    }
-    else{
-        arr1 = mergeSort(arr1);
-        arr2 = mergeSort(arr2);
-    }
-    return mergedArray;
+    var arr1 = mergeSort(arr.slice(0, middle));
+    var arr2 = mergeSort(arr.slice(middle, arr.length));
+    return mergeArrays(arr1, arr2);
 }
 
-console.log(mergeArrays([1,3,6,9], [2,5,7,10]));
-console.log(mergeArrays([1,13,26], [2,5,7,10]));
+//console.log(mergeSort([6,9,1,3]));
+console.log(mergeSort([5,8,2,4,10,30,20]));
+    //, [2,5,7,10]));
+//console.log(mergeArrays([1,13,26], [2,5,7,10]));
