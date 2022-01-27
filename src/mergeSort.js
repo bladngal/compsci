@@ -25,7 +25,10 @@ function mergeArrays(arr1, arr2) {
 }
 
 //take an array and break it in half, returning two smaller arrays
+//recursively do this for each half, breaking them down into smaller arrays
 //once each array has 1 or 0 elements in it, merge those arrays together
+//then just keep on keepin' on until all the arrays magically roll back
+//up the stack and merge themselves together
 function mergeSort(arr){
     if(arr.length <=1) return arr;
 
@@ -35,7 +38,6 @@ function mergeSort(arr){
     return mergeArrays(arr1, arr2);
 }
 
-//console.log(mergeSort([6,9,1,3]));
-console.log(mergeSort([5,8,2,4,10,30,20]));
-    //, [2,5,7,10]));
-//console.log(mergeArrays([1,13,26], [2,5,7,10]));
+console.log(mergeSort([6,9,1,3]));
+//console.log(mergeSort([5,8,2,4,10,30,20]));
+    
