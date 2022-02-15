@@ -69,6 +69,31 @@ class SinglyLinkedList{
 
         return this;
     }
+
+    get(idx){
+        if(idx<0 || idx >= this.length){
+            return null;
+        }
+        var idxNode = this.head;
+        let counter = 0;
+        while(counter < idx){
+            idxNode = idxNode.next;
+            counter++;
+        }
+        return idxNode;
+    }
+
+    set(idx, val){
+
+        let setNode = this.get(idx);
+        //set the value to the new value and return true
+        if(setNode){
+            setNode.val = val;
+            return true;
+        }
+        //if get() returned null, then this set did not work!
+        return false;
+    }
 }
 
 function testProgram(){
@@ -84,6 +109,9 @@ function testProgram(){
     myList.unshift("why");
     console.log(myList);
     myList.shift();
+    console.log(myList);
+    console.log(myList.get(1));
+    console.log(myList.set(0, "goodbye"));
     console.log(myList);
 
 }
