@@ -192,6 +192,7 @@ class SinglyLinkedList{
         this.head = current;
         this.tail = origFirst; //make the old head the new tail
     }
+
 }
 
 function testProgram(){
