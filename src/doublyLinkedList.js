@@ -52,7 +52,68 @@ class DoublyLinkedList{
             returnNode.prev = null;
         }
         return returnNode;
-}
+    }
+
+    shift(){
+        if(!this.head){
+            return undefined;
+        }
+
+        var oldHead = this.head;
+        //if the list only has one value
+        if(this.length == 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.head = oldHead.next;
+            this.head.prev = null;
+            oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+
+    unshift(val){
+        var newHead = new Node(val);
+        if(this.head){
+            newHead.next = this.head;
+            this.head.prev = newHead;
+            this.head = newHead;
+        }
+        else{
+            this.head = newHead;
+            this.tail = newHead;
+        }
+        this.length++;
+        return this;
+    }
+
+    get(idx){
+        if(idx < 0 || idx >= this.length){
+            return null;
+        }
+        if(idx <= this.length/2){
+            var temp = this.head;
+            var counter=0;
+            while(counter < idx){
+                temp = temp.next;
+                counter++;
+            }
+            console.log("logging ", temp.val);
+            return temp;
+        }
+        else{
+            var counter = this.length - 1;
+            var temp = this.tail;
+            while(counter > idx){
+                temp = temp.prev;
+                counter--;
+            }
+            console.log("logging ", temp.val);
+            return temp;
+        }
+    }
 
     //just console.log all the values
     print(){
@@ -65,10 +126,15 @@ class DoublyLinkedList{
 }
 
 myList = new DoublyLinkedList;
-myList.push(1);
+//myList.push(1);
 myList.print();
 myList.push("hello");
 myList.push("world");
+myList.push("test");
+myList.push("test2");
 myList.print();
-console.log(myList.pop());
+//myList.shift();
+myList.unshift("begin");
+//console.log(myList.pop());
 myList.print();
+myList.get(2);
