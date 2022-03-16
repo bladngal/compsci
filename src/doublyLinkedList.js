@@ -115,6 +115,64 @@ class DoublyLinkedList{
         }
     }
 
+    set(idx, val){
+        var node = this.get(idx);
+        if(node){
+            node.val = val;
+            return true;
+        }
+        else return false;
+    }
+
+    //insert value val at index idx
+    insert(idx, val){
+        if(idx < 0 || idx > this.length){
+            return null;
+        }
+        else if(idx == 0){
+            this.unshift(val);
+        }
+        else if(idx == this.length){
+            this.push(val);
+        }
+        else{
+            let prevNode = this.get(idx-1);
+            let temp = prevNode.next;
+            let newNode = new Node(val);
+            prevNode.next = newNode;
+            newNode.next = temp;
+            newNode.prev = prevNode;
+            temp.prev = newNode;
+            this.lenght++;
+        }
+        return true;
+    }
+
+    //remove the node at index idx, return the node with no next or prev
+    remove(idx){
+        if(idx < 0 || idx >= this.length){
+            return null;
+        }
+        else if(idx == 0){
+            return this.shift();
+        }
+        else if(idx == this.length){
+            return this.pop();
+        }
+        else{ 
+            let begoneNode = this.get(idx);
+            begoneNode.prev.next = begoneNode.next;
+            begoneNode.next.prev = begoneNode.prev;
+            
+            begoneNode.next = null;
+            begoneNode.prev = null;
+            this.length--;
+
+            return begoneNode;
+        }
+
+    }
+
     //just console.log all the values
     print(){
         let current = this.head;  
@@ -138,3 +196,9 @@ myList.unshift("begin");
 //console.log(myList.pop());
 myList.print();
 myList.get(2);
+console.log(myList.set(1, "start"));
+myList.insert(2, "cruel");
+myList.print();
+myList.remove(2);
+myList.print();
+//console.log(myList);
