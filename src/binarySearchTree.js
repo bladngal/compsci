@@ -15,9 +15,9 @@ class binarySearchTree{
         if(!node){
             return;
         }
-        console.log(node);
         this.printNode(node.left);
         this.printNode(node.right);
+        console.log(node);
     }
 
     insert(val){
@@ -43,20 +43,72 @@ class binarySearchTree{
             else if(val> testNode.val){
                 if(!testNode.right){
                     testNode.right = new Node(val);       
+                    return this;
                 }   
                 else{
                     testNode = testNode.right;
-                    return this;
                 }
 
             }
+            //if it already exists, we freak out and run around in circles
+            else if(val === testNode.val){
+                return undefined;
+            }
         }  
+    }
+
+    find(val){
+
+        var stillLooking = true;
+        var currentNode = this.root;
+        var currentVal = currentNode.val;
+
+        while(stillLooking){
+            if(val === currentVal) return true;
+            else if(val < currentVal){
+                if(currentVal.left){
+                    currentNode = currentNode.left;
+                    currentVal = currentNode.val;
+                }
+                else stillLooking = false;
+            }
+            else if(val > currentVal){
+                if(currentVal.right){
+                    currentNode = currentNode.right;
+                    currentVal = currentNode.val;
+                } else stillLooking = false;
+            }
+        }
+
+    }
+
+    bfs(){
+        let data = [];
+        let queue = [];
+        let node = this.root;
+        queue.push(this.root);
+
+        while(queue.length > 0){
+            node = queue.shift();
+            data.push(node.val);
+            if(node.left !== null) queue.push(node.left);
+            if(node.right !== null) queue.push(node.right);  
+        }
+        return data;
     }
 }
 
 var bst = new binarySearchTree;
-bst.insert(5);
-bst.insert(2);
+bst.insert(10);
+bst.insert(6);
+bst.insert(3);
 bst.insert(8);
-console.log(bst);
+bst.insert(15);
+bst.insert(20);
+console.log(bst.bfs());
+//console.log(bst);
 bst.printNode(bst.root);
+//bst.find(3);
+//  10
+// 6    15
+//3 8     20
