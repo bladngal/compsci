@@ -15,9 +15,18 @@ class binarySearchTree{
         if(!node){
             return;
         }
-        this.printNode(node.left);
-        this.printNode(node.right);
-        console.log(node);
+        console.log(node.val);
+        if(node.left){
+            console.log('left {');
+            this.printNode(node.left);
+            console.log('}');
+        }
+        if(node.right){
+
+            console.log('right {');
+            this.printNode(node.right);
+            console.log('}');
+        }
     }
 
     insert(val){
@@ -82,6 +91,62 @@ class binarySearchTree{
 
     }
 
+    //recursive function to traverse the tree preorder
+    traversePreorder(node, dfsValues){
+        dfsValues.push(node.val); //[10,6,3,8,15]
+        if(node.left) this.traversePreorder(node.left, dfsValues);
+        if(node.right) this.traversePreorder(node.right, dfsValues);
+        return dfsValues;
+    }
+
+    //recursive function to traverse the tree postorder
+    traversePostorder(node, dfsValues){
+        if(node.left) this.traversePostorder(node.left, dfsValues);
+        if(node.right) this.traversePostorder(node.right, dfsValues);
+        dfsValues.push(node.val); //[3,8,6,20,15,10]
+        return dfsValues;
+    }
+
+    dfsPreorder(){
+        let currentNode = this.root;
+        let dfsValues = [];
+        if(!currentNode) return undefined;
+        else{
+            this.traversePreorder(currentNode, dfsValues)   
+        }
+        return dfsValues;
+    }
+
+    dfsPostorder(){
+        let currentNode = this.root;
+        let dfsValues = [];
+        if(!currentNode) return undefined;
+        else{
+            this.traversePostorder(currentNode, dfsValues)   
+        }
+        return dfsValues;
+    }
+
+    dfsInorder(){
+        let currentNode = this.root;
+        let dfsValues = [];
+        //recursive function to traverse the tree postorder
+        function traverseInorder(node){
+            if(node.left) traverseInorder(node.left);
+            dfsValues.push(node.val); //[3,6,8,10,15,20]
+            if(node.right) traverseInorder(node.right);
+        }
+    
+        if(!currentNode) return undefined;
+        else{
+            traverseInorder(currentNode, dfsValues)   
+        }
+        return dfsValues;
+    }
+                                                    //10
+                                            // 6            15
+                                        //3         8           20
+
     bfs(){
         let data = [];
         let queue = [];
@@ -112,3 +177,6 @@ bst.printNode(bst.root);
 //  10
 // 6    15
 //3 8     20
+console.log(bst.dfsPreorder());
+console.log(bst.dfsPostorder());
+console.log(bst.dfsInorder());
