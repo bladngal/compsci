@@ -38,24 +38,32 @@ class MaxBinaryHeap{
         
         if(!leftChild && !rightChild) return rootVal;
 
-        let newRoot = this.values[this.values.length-1];
-        this.value[0] = newRoot;
-        let largerChildIdx;
+        //let newRoot = this.values[this.values.length-1];
+        let newRoot = this.values.pop();
+        
+        this.values[0] = newRoot;
+        var largerChildIdx;
+        let largerChild = Math.max(leftChild, rightChild);
 
-        //TODO add error checking in to see if left and right children exist and only
-        // check the ones that are there
-
-        // like: if leftChild > what's in parentIdx || rightChild > what's in parentIdx
-        while(leftChild > this.values[parentIdx]  || rightChild > this.values[parentIdx]){
+        while(leftChild > newRoot || rightChild > newRoot){
 
             if(leftChild < rightChild) largerChildIdx = parentIdx*2+2;
             else largerChildIdx = parentIdx*2+1;
-            let largerChild = Math.max(leftChild, rightChild);
             if(newRoot < largerChild){
-                let temp = this.values[parentIdx];
                 this.values[parentIdx] = largerChild;
-                this.values[largerChildIdx] = temp;
+                this.values[largerChildIdx] = newRoot;
+                parentIdx = largerChildIdx;
+                newRoot = this.values[parentIdx];
             }
+            if(this.values[parentIdx*2+1]){
+                leftChild = this.values[parentIdx*2+1];
+            }
+            else leftChild = null;
+            if(this.values[parentIdx*2+2]){
+                rightChild = this.values[parentIdx*2+2];
+            }
+            else rightChild = null;
+
         }
         return rootVal;
     }
@@ -76,6 +84,11 @@ myHeap.printHeap();
 myHeap.insert(3);
 myHeap.printHeap();
 myHeap.insert(12);
+myHeap.printHeap();
+
+console.log(myHeap.extractMax());
+myHeap.printHeap();
+console.log(myHeap.extractMax());
 myHeap.printHeap();
 
 
