@@ -35,11 +35,10 @@ class MaxBinaryHeap{
         let parentIdx = 0;
         let leftChild = this.values[parentIdx*2+1];
         let rightChild = this.values[parentIdx*2+2];
+        let newRoot = this.values.pop();
         
         if(!leftChild && !rightChild) return rootVal;
 
-        //let newRoot = this.values[this.values.length-1];
-        let newRoot = this.values.pop();
         
         this.values[0] = newRoot;
         var largerChildIdx;
